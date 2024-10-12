@@ -1,0 +1,14 @@
+git clone --recursive https://github.com/wxhere/docker-ubuntu-vnc-desktop.git ./docker-ubuntu-vnc-desktop
+git submodule update --init --recursive
+
+sudo docker build -t lxqt-x64 .
+
+docker run -d --rm \
+  --name=ubuntu-desktop-lxqt-test \
+  -e VNC_PASSWORD=123456 \
+  -e HTTP_PASSWORD=123456 \
+  -e USER=sandbox \
+  -e PASSWORD=123456 \
+  -p 5900:5900 \
+  -p 6080:80 \
+  lxqt-x64
