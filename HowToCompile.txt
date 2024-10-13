@@ -1,9 +1,13 @@
+check out sources
+=========================
 git clone --recursive https://github.com/wxhere/docker-ubuntu-vnc-desktop.git ./docker-ubuntu-vnc-desktop
 git submodule update --init --recursive
 
+build & test (amd64)
+=========================
 sudo docker build -f Dockerfile.amd64 -t wxhere/ubuntu-desktop-lxde-vnc:lxqt-amd64 .
 
-docker run -d --rm \
+sudo docker run -d --rm \
   --name=ubuntu-desktop-lxqt-test \
   -e VNC_PASSWORD=123456 \
   -e HTTP_PASSWORD=123456 \
@@ -15,9 +19,11 @@ docker run -d --rm \
 
 docker push wxhere/ubuntu-desktop-lxde-vnc:lxqt-amd64
 
+build & test (arm64)
+=========================
 sudo docker build -f Dockerfile.arm64 -t wxhere/ubuntu-desktop-lxde-vnc:lxqt-arm64 .
 
-docker run -d --rm \
+sudo docker run -d --rm \
   --name=ubuntu-desktop-lxqt-test \
   -e VNC_PASSWORD=123456 \
   -e HTTP_PASSWORD=123456 \
@@ -27,6 +33,10 @@ docker run -d --rm \
   -p 6080:80 \
   wxhere/ubuntu-desktop-lxde-vnc:lxqt-arm64
 
+docker push wxhere/ubuntu-desktop-lxde-vnc:lxqt-arm64
+
+merge 2 arch to one tag
+=========================
 docker manifest create wxhere/ubuntu-desktop-lxde-vnc:lxqt ubuntu-desktop-lxde-vnc:lxqt-amd64 ubuntu-desktop-lxde-vnc:lxqt-arm64
 docker manifest annotate wxhere/ubuntu-desktop-lxde-vnc:lxqt ubuntu-desktop-lxde-vnc:lxqt-amd64 --os linux --arch amd64
 docker manifest annotate wxhere/ubuntu-desktop-lxde-vnc:lxqt ubuntu-desktop-lxde-vnc:lxqt-arm64 --os linux --arch arm64
