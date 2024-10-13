@@ -36,6 +36,13 @@ RUN apt update \
     && apt autoremove -y \
     && rm -rf /var/lib/apt/lists/*
 
+# install xdg-utils
+RUN apt update \
+    && apt install -y --no-install-recommends xdg-utils \
+    && apt autoclean -y \
+    && apt autoremove -y \
+    && rm -rf /var/lib/apt/lists/*
+
 RUN apt update \
     && apt install -y --no-install-recommends --allow-unauthenticated \
     lxqt openbox lxqt-themes \

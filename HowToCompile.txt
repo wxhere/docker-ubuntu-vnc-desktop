@@ -37,7 +37,6 @@ sudo docker push wxhere/ubuntu-desktop-lxde-vnc:lxqt-arm64
 
 merge 2 arch to one tag
 =========================
-docker manifest create wxhere/ubuntu-desktop-lxde-vnc:lxqt wxhere/ubuntu-desktop-lxde-vnc:lxqt-amd64 wxhere/ubuntu-desktop-lxde-vnc:lxqt-arm64
-docker manifest annotate wxhere/ubuntu-desktop-lxde-vnc:lxqt wxhere/ubuntu-desktop-lxde-vnc:lxqt-amd64 --os linux --arch amd64
-docker manifest annotate wxhere/ubuntu-desktop-lxde-vnc:lxqt wxhere/ubuntu-desktop-lxde-vnc:lxqt-arm64 --os linux --arch arm64
+docker manifest rm wxhere/ubuntu-desktop-lxde-vnc:lxqt
+docker manifest create wxhere/ubuntu-desktop-lxde-vnc:lxqt wxhere/ubuntu-desktop-lxde-vnc:lxqt-amd64 wxhere/ubuntu-desktop-lxde-vnc@sha256:d022b3b305e32fea24b03df30c1b6617884c25035bd65c399f18c95c3f70f854
 docker manifest push wxhere/ubuntu-desktop-lxde-vnc:lxqt
